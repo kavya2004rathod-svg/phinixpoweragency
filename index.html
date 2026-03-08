@@ -4,91 +4,240 @@
 <title>Phinix Power Agency</title>
 
 <style>
-
 body{
-font-family: Arial;
-margin:0;
-background:#f4f4f4;
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f4f4f4;
+  scroll-behavior: smooth;
 }
 
 header{
-background:#0a3d62;
-color:white;
-padding:40px;
-text-align:center;
+  background:#0a3d62;
+  color:white;
+  padding:40px;
+  text-align:center;
+}
+
+header h1{
+  font-size:50px;
+  margin:0;
 }
 
 nav{
-background:#222;
-padding:12px;
-text-align:center;
+  background:#222;
+  padding:12px;
+  text-align:center;
+  position: sticky;
+  top:0;
+  z-index:100;
 }
 
 nav a{
-color:white;
-margin:15px;
-text-decoration:none;
-font-weight:bold;
+  color:white;
+  margin:15px;
+  text-decoration:none;
+  font-weight:bold;
+  transition: color 0.3s;
+}
+
+nav a:hover{
+  color:#1e5f8c;
 }
 
 .hero{
-background:url('https://images.unsplash.com/photo-1596079895150-4b9a24a2c0d0?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-color:white;
-padding:100px 20px;
-text-align:center;
+  background:url('https://images.unsplash.com/photo-1596079895150-4b9a24a2c0d0?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+  color:white;
+  padding:120px 20px;
+  text-align:center;
 }
 
 .hero h1{
-font-size:40px;
+  font-size:48px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:22px;
 }
 
 section{
-background:white;
-padding:40px;
-margin:20px;
-border-radius:8px;
+  background:white;
+  padding:60px 40px;
+  margin:20px auto;
+  border-radius:8px;
+  max-width:1200px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+  opacity:0;
+  transform: translateY(20px);
+  transition: all 0.8s ease;
+}
+
+section.visible{
+  opacity:1;
+  transform: translateY(0);
 }
 
 h2{
-color:#0a3d62;
+  color:#0a3d62;
+  text-align:center;
+  margin-bottom:30px;
 }
 
 ul{
-line-height:1.8;
+  line-height:1.8;
 }
 
 .brand-logos{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:30px;
-align-items:center;
-margin-top:20px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:40px;
+  align-items:center;
+  margin-top:20px;
 }
 
 .brand-logos img{
-max-height:60px;
+  max-height:60px;
+  transition: transform 0.3s;
+}
+
+.brand-logos img:hover{
+  transform: scale(1.1);
+}
+
+.products-gallery{
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+  justify-content:center;
+}
+
+.products-gallery img{
+  width:220px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.products-gallery img:hover{
+  transform: translateY(-5px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+form input, form textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+form button{
+  background:#0a3d62;
+  color:white;
+  padding:14px 25px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-size:16px;
+  transition: background 0.3s;
+}
+
+form button:hover{
+  background:#1e5f8c;
 }
 
 .whatsapp{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25D366;
-color:white;
-padding:15px 20px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:15px 22px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+}
+
+#topBtn{
+  display:none;
+  position:fixed;
+  bottom:80px;
+  right:25px;
+  z-index:99;
+  font-size:18px;
+  border:none;
+  outline:none;
+  background:#0a3d62;
+  color:white;
+  cursor:pointer;
+  padding:12px 18px;
+  border-radius:50px;
+  transition: background 0.3s;
+}
+
+#topBtn:hover{
+  background:#1e5f8c;
 }
 
 footer{
-background:#0a3d62;
-color:white;
-text-align:center;
-padding:20px;
+  background:#0a3d62;
+  color:white;
+  text-align:center;
+  padding:25px;
+  margin-top:20px;
 }
 
+/* ===== RESPONSIVE STYLES ===== */
+@media screen and (max-width: 1024px){
+  .hero h1{
+    font-size:40px;
+  }
+  .hero p{
+    font-size:20px;
+  }
+  section{
+    padding:50px 20px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  nav a{
+    display:block;
+    margin:10px 0;
+  }
+  .hero h1{
+    font-size:36px;
+  }
+  .hero p{
+    font-size:18px;
+  }
+  .products-gallery img{
+    width:160px;
+  }
+  .brand-logos{
+    gap:20px;
+  }
+}
+
+@media screen and (max-width: 480px){
+  header h1{
+    font-size:32px;
+  }
+  .hero h1{
+    font-size:28px;
+  }
+  .hero p{
+    font-size:16px;
+  }
+  .products-gallery img{
+    width:120px;
+  }
+  section{
+    padding:30px 15px;
+  }
+}
 </style>
 
 </head>
@@ -102,10 +251,9 @@ padding:20px;
 
 <nav>
 <a href="#">Home</a>
-<a href="#">Products</a>
-<a href="#">Vision</a>
-<a href="#">Mission</a>
-<a href="#">Contact</a>
+<a href="#products">Products</a>
+<a href="#brands">Brands</a>
+<a href="#contact">Contact</a>
 </nav>
 
 <div class="hero">
@@ -121,21 +269,18 @@ We supply reliable products from trusted global brands at competitive prices.
 </p>
 </section>
 
-<section>
+<section id="products">
 <h2>Our Products</h2>
-<ul>
-<li>ABB Switchgears</li>
-<li>Schneider Electric Switchgears</li>
-<li>KEI Wires</li>
-<li>V-Marc Wires</li>
-<li>Wipro LED Lighting & Automation</li>
-<li>LEDL Motors</li>
-<li>LESS Mesh Cable Tray</li>
-<li>Control Panels & Accessories</li>
-</ul>
+<div class="products-gallery">
+<img src="https://cdn.pixabay.com/photo/2016/09/06/09/54/electric-1641416_960_720.jpg" alt="ABB Switchgear">
+<img src="https://cdn.pixabay.com/photo/2018/05/18/16/44/electric-cables-3412581_960_720.jpg" alt="KEI Wires">
+<img src="https://cdn.pixabay.com/photo/2017/05/10/19/28/led-2304869_960_720.jpg" alt="Wipro LED Lighting">
+<img src="https://cdn.pixabay.com/photo/2017/03/10/17/28/cable-2134261_960_720.jpg" alt="V-Marc Mesh Tray">
+<img src="https://cdn.pixabay.com/photo/2016/11/29/05/08/motor-1869508_960_720.jpg" alt="LEDL Motors">
+</div>
 </section>
 
-<section>
+<section id="brands">
 <h2>Our Trusted Brands</h2>
 <div class="brand-logos">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/ABB_logo.svg/200px-ABB_logo.svg.png" alt="ABB">
@@ -160,17 +305,56 @@ To deliver high-quality, reliable, and cost-effective electrical solutions while
 </p>
 </section>
 
-<section>
+<section id="contact">
 <h2>Contact Us</h2>
 <p>Email: your@email.com</p>
 <p>Phone: +91 9876543210</p>
+
+<h3>Send Us a Message</h3>
+<form action="https://formspree.io/f/mwkajnry" method="POST">
+<input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+
+<h3>Our Location</h3>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.513579784733!2d72.83335741531692!3d19.129536287097917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63c7ea8d3db%3A0xe2f54e0c2de9e1b3!2sMumbai%2C%20India!5e0!3m2!1sen!2sus!4v1673458859536!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
 </section>
+
+<button id="topBtn" onclick="scrollToTop()">↑ Top</button>
 
 <a class="whatsapp" href="https://wa.me/919876543210">WhatsApp Us</a>
 
 <footer>
 <p>© 2026 Phinix Power Agency</p>
 </footer>
+
+<script>
+// Scroll-to-top button
+var topBtn = document.getElementById("topBtn");
+window.onscroll = function() {
+  if(document.body.scrollTop > 300 || document.documentElement.scrollTop > 300){
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
+
+  // Reveal sections on scroll
+  var sections = document.querySelectorAll("section");
+  for(var i=0;i<sections.length;i++){
+    var top = sections[i].getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      sections[i].classList.add("visible");
+    }
+  }
+};
+
+function scrollToTop(){
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+</script>
 
 </body>
 </html>
