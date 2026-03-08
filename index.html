@@ -25,23 +25,46 @@ header h1{
 
 nav{
   background:#222;
-  padding:12px;
-  text-align:center;
   position: sticky;
   top:0;
   z-index:100;
 }
 
-nav a{
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 20px;
+}
+
+.nav-links{
+  display:flex;
+  gap:15px;
+}
+
+.nav-links a{
   color:white;
-  margin:15px;
   text-decoration:none;
   font-weight:bold;
   transition: color 0.3s;
 }
 
-nav a:hover{
-  color:#1e5f8c;
+.nav-links a:hover, .nav-links a.active{
+  color:#ff9800;
+}
+
+.hamburger{
+  display:none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger div{
+  width:25px;
+  height:3px;
+  background:white;
+  margin:4px 0;
+  transition: 0.4s;
 }
 
 .hero{
@@ -58,6 +81,31 @@ nav a:hover{
 
 .hero p{
   font-size:22px;
+}
+
+.hero-buttons{
+  margin-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.btn-hero{
+  background:#ff9800;
+  color:white;
+  padding:14px 28px;
+  border-radius:6px;
+  font-weight:bold;
+  text-decoration:none;
+  font-size:18px;
+  transition: all 0.3s ease;
+}
+
+.btn-hero:hover{
+  background:#e68900;
+  transform: translateY(-4px);
+  box-shadow:0 6px 12px rgba(0,0,0,0.2);
 }
 
 section{
@@ -147,17 +195,48 @@ form button:hover{
   background:#1e5f8c;
 }
 
-.whatsapp{
+.whatsapp, .quote-btn{
   position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
   padding:15px 22px;
   border-radius:50px;
   text-decoration:none;
   font-weight:bold;
   font-size:16px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+  z-index:100;
+}
+
+.whatsapp{
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+}
+
+.quote-btn{
+  bottom:20px;
+  left:20px;
+  background:#ff9800;
+  color:white;
+}
+
+.whatsapp:hover{
+  transform: translateY(-3px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.3);
+}
+
+.quote-btn:hover{
+  background:#e68900;
+  transform: translateY(-3px);
+  box-shadow:0 6px 14px rgba(0,0,0,0.3);
+}
+
+@keyframes pulse{
+  0%{ transform: scale(1); }
+  50%{ transform: scale(1.05); }
+  100%{ transform: scale(1); }
 }
 
 #topBtn{
@@ -203,10 +282,26 @@ footer{
 }
 
 @media screen and (max-width: 768px){
-  nav a{
-    display:block;
-    margin:10px 0;
+  .nav-links{
+    display:none;
+    flex-direction:column;
+    gap:10px;
+    background:#222;
+    position:absolute;
+    top:60px;
+    right:0;
+    width:200px;
+    padding:10px;
   }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .hamburger{
+    display:flex;
+  }
+
   .hero h1{
     font-size:36px;
   }
@@ -239,9 +334,7 @@ footer{
   }
 }
 </style>
-
 </head>
-
 <body>
 
 <header>
@@ -250,15 +343,29 @@ footer{
 </header>
 
 <nav>
-<a href="#">Home</a>
-<a href="#products">Products</a>
-<a href="#brands">Brands</a>
-<a href="#contact">Contact</a>
+<div class="nav-container">
+  <div class="logo" style="color:white;font-weight:bold;">Logo</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#">Home</a>
+    <a href="#products">Products</a>
+    <a href="#brands">Brands</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="hamburger" id="hamburger">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
 </nav>
 
 <div class="hero">
 <h1>Powering Industries with Reliable Electrical Solutions</h1>
 <p>Authorized Dealer of ABB, Schneider Electric, KEI, V-Marc & Wipro Products</p>
+<div class="hero-buttons">
+  <a href="#contact" class="btn-hero">Get a Quote</a>
+  <a href="#products" class="btn-hero">View Products</a>
+</div>
 </div>
 
 <section>
@@ -307,8 +414,8 @@ To deliver high-quality, reliable, and cost-effective electrical solutions while
 
 <section id="contact">
 <h2>Contact Us</h2>
-<p>Email: your@email.com</p>
-<p>Phone: +91 9876543210</p>
+<p>Email: phenixpoweragency@gmail.com</p>
+<p>Phone: +91 6363423918</p>
 
 <h3>Send Us a Message</h3>
 <form action="https://formspree.io/f/mwkajnry" method="POST">
@@ -319,34 +426,58 @@ To deliver high-quality, reliable, and cost-effective electrical solutions while
 </form>
 
 <h3>Our Location</h3>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3768.513579784733!2d72.83335741531692!3d19.129536287097917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63c7ea8d3db%3A0xe2f54e0c2de9e1b3!2sMumbai%2C%20India!5e0!3m2!1sen!2sus!4v1673458859536!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 </section>
 
+<!-- Floating buttons -->
+<a class="quote-btn" href="#contact">Request a Quote</a>
+<a class="whatsapp" href="https://wa.me/916363423918">WhatsApp Us</a>
 <button id="topBtn" onclick="scrollToTop()">↑ Top</button>
-
-<a class="whatsapp" href="https://wa.me/919876543210">WhatsApp Us</a>
 
 <footer>
 <p>© 2026 Phinix Power Agency</p>
 </footer>
 
 <script>
-// Scroll-to-top button
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+// Scroll-to-top button & section animations & active menu
 var topBtn = document.getElementById("topBtn");
+var navItems = document.querySelectorAll(".nav-links a");
+var sections = document.querySelectorAll("section");
+
 window.onscroll = function() {
+  // Top button
   if(document.body.scrollTop > 300 || document.documentElement.scrollTop > 300){
     topBtn.style.display = "block";
   } else {
     topBtn.style.display = "none";
   }
 
-  // Reveal sections on scroll
-  var sections = document.querySelectorAll("section");
+  // Section animations
   for(var i=0;i<sections.length;i++){
     var top = sections[i].getBoundingClientRect().top;
     if(top < window.innerHeight - 100){
       sections[i].classList.add("visible");
+    }
+  }
+
+  // Active menu link
+  for(var i=0;i<sections.length;i++){
+    var sectionTop = sections[i].offsetTop - 80;
+    var sectionHeight = sections[i].offsetHeight;
+    if(window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight){
+      navItems.forEach(item => item.classList.remove("active"));
+      var id = sections[i].getAttribute("id");
+      if(id){
+        document.querySelector(`.nav-links a[href="#${id}"]`)?.classList.add("active");
+      }
     }
   }
 };
